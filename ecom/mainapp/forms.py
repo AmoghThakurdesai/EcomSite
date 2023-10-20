@@ -11,3 +11,11 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+from django import forms
+
+class RawSQLForm(forms.Form):
+    query = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 5, 'cols': 50}),
+        label='Enter your raw SQL query:'
+    ) 
