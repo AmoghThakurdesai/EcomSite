@@ -15,3 +15,7 @@ now the form for adding raw sql queries is added for testing purposes
 
 ###### TODO
 - we will add the custom product in the cart section after an action
+- delete the login table (becoz auth_users has the user auth data)
+- make the connections between rest of the tables thro foreign keys
+- replace deleted login table bu user in aut_user table
+- add some fking data to tables
