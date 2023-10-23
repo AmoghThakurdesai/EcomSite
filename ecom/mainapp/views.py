@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.views.generic import ListView
 from django.db import connection
 import django.db as db
 from django.contrib.auth.models import User
@@ -11,6 +12,7 @@ from django.urls import reverse_lazy
 from .forms import SignupForm,RawSQLForm
 from django.contrib import messages
 import sys
+from .models import Product
 # Create your views here.
 
 def dbquery(query: str):
@@ -59,4 +61,8 @@ def raw_sql_query_view(request):
     else:
         form = RawSQLForm()
         messages.info(request,"No query added.")
-    return render(request, "raw_sql_form.html",{"form": form,"ack":acknowledgement}) 
+    return render(request, "raw_sql_form.html",{"form": form,"ack":acknowledgement})
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'products_list.html'

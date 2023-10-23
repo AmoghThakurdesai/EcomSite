@@ -12,3 +12,6 @@ now the form for adding raw sql queries is added for testing purposes
 - make user named ecom and set password to 12345. django uses this user to access the db.
 - use `python3 manage.py runserver` in the ecom directory (main project directory) to start the backend
 - after starting the backend, go to http://127.0.0.1:8000/mainapp/home to pass in raw sql queries to db.
+
+###### TODO
+- we will add the custom product in the cart section after an action
