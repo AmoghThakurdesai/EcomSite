@@ -1,6 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView,DetailView
 from django.db import connection
 import django.db as db
 from django.contrib.auth.models import User
@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 from .forms import SignupForm,RawSQLForm
 from django.contrib import messages
 import sys
-from .models import Product
+from .models import *
 # Create your views here.
 
 def dbquery(query: str):
@@ -66,3 +66,25 @@ def raw_sql_query_view(request):
 class ProductListView(ListView):
     model = Product
     template_name = 'products_list.html'
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_detail.html'
+
+class CustomProductListView(ListView):
+    model = CustomProduct
+    template_name = 'custom_products_list.html'
+
+class CustomProductDetailView(DetailView):
+    model = CustomProduct
+    template_name = 'custom_products_detail.html'
+
+    def get_object(self, queryset=None):
+        # Replace 'your_field' with the field you want to use for object retrieval
+        field_name = 'id'
+        value = self.kwargs.get(field_name)  # Get the value from URL parameters
+
+        # Use get_object_or_404 to retrieve the object based on the specified field
+        obj = get_object_or_404(self.model, **{field_name: value})
+
+        return obj

@@ -7,5 +7,8 @@ urlpatterns = [
     path('login/',LoginView.as_view(),name="login"),
     path('signup/',SignupView.as_view(),name="signup"),
     path('home/',views.raw_sql_query_view, name="home"),
-    path('products/',ProductListView.as_view(), name = 'product-list'),
+    path('productlist/',ProductListView.as_view(), name = 'product-list'),
+    path('product/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
+    path('customproductlist/',CustomProductListView.as_view(), name = 'custom-product-list'),
+    path('customproduct/<int:id>/', CustomProductDetailView.as_view(), name='custom-product-detail'),
 ]

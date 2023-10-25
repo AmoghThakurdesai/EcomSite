@@ -39,7 +39,7 @@ class CustomProduct(models.Model):
     cid = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'custom_product'
 
 

@@ -14,8 +14,10 @@ now the form for adding raw sql queries is added for testing purposes
 - after starting the backend, go to http://127.0.0.1:8000/mainapp/home to pass in raw sql queries to db.
 
 ###### TODO
-- we will add the custom product in the cart section after an action
+- we will add the custom product in the cart section after an action, same for product
 - delete the login table (becoz auth_users has the user auth data)
 - make the connections between rest of the tables thro foreign keys
 - replace deleted login table bu user in aut_user table
 - add some fking data to tables
+- add images to django
+- refactor the templates to include a base template for navbar
