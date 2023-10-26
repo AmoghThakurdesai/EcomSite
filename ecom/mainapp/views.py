@@ -3,16 +3,11 @@ from django.http import HttpResponse
 from django.views.generic import ListView,DetailView
 from django.db import connection
 import django.db as db
-from django.contrib.auth.models import User
 from .forms import *
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.views import LogoutView
-from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from .forms import SignupForm,RawSQLForm
+from .forms import RawSQLForm
 from django.contrib import messages
 import sys
-from .models import *
 # Create your views here.
 
 def dbquery(query: str):
@@ -34,18 +29,6 @@ def dbquery(query: str):
     except:
         print("Unexpected Error:",sys.exc_info()[0])
 
-
-class SignupView(CreateView):
-    form_class = SignupForm
-    template_name = 'signup.html'
-    success_url = reverse_lazy('home')
-
-class CustomLoginView(LoginView):
-    form_class = LoginForm
-    template_name = 'login.html'
-    def get_success_url(self) -> str:
-        return reverse_lazy('home')
-
 def raw_sql_query_view(request):
     # had an error here when rawsqlform had param as request only, it required param as request.POST
     form = RawSQLForm(request.POST) 
@@ -63,28 +46,31 @@ def raw_sql_query_view(request):
         messages.info(request,"No query added.")
     return render(request, "raw_sql_form.html",{"form": form,"ack":acknowledgement})
 
-class ProductListView(ListView):
-    model = Product
-    template_name = 'products_list.html'
+def login(request):
+    try:
+        username = request.POST['username']
+        password = request.POST['password']
+        result = dbquery(f"select * from users where username =  {};")
+    except:
+        print("Error")
+    return render(request, "login.html")
 
-class ProductDetailView(DetailView):
-    model = Product
-    template_name = 'product_detail.html'
+def signup(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    return render(request, "signup.html")
 
-class CustomProductListView(ListView):
-    model = CustomProduct
-    template_name = 'custom_products_list.html'
+def productdetail(request):
+    return render(request, "product_detail.html")
 
-class CustomProductDetailView(DetailView):
-    model = CustomProduct
-    template_name = 'custom_products_detail.html'
+def productlist(request):
+    query = dbquery("select * from product;")
+    return render(request, "product_list.html",context = {"query":query})
 
-    def get_object(self, queryset=None):
-        # Replace 'your_field' with the field you want to use for object retrieval
-        field_name = 'id'
-        value = self.kwargs.get(field_name)  # Get the value from URL parameters
+def customproductdetail(request):
+    return render(request, "custom_product_detail.html")
 
-        # Use get_object_or_404 to retrieve the object based on the specified field
-        obj = get_object_or_404(self.model, **{field_name: value})
-
-        return obj
+def customproductlist(request):
+    query = dbquery("select * from custom_product;")
+    
+    return render(request, "custom_products_list.html")

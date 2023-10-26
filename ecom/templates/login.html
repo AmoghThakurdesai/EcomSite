@@ -4,21 +4,21 @@
     body {
         background-color: #333;
     }
-    .signup-card {
+    .login-card {
         background-color: #222;
         border-radius: 10px;
     }
-    .signup-form {
+    .login-form {
         padding: 20px;
     }
 </style>
 {% endblock %}
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card signup-card bg-dark">
-        <div class="card-body signup-form">
-            <h3 class="card-title text-center text-white">Signup</h3>
-            <form action="{% url 'signup' %}" method="POST">
+    <div class="card login-card bg-dark">
+        <div class="card-body login-form">
+            <h3 class="card-title text-center text-white">Login</h3>
+            <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="username" class="form-label text-white">Username</label>
@@ -28,7 +28,7 @@
                     <label for="password" class="form-label text-white">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter your password">
                 </div>
-                <button type="submit" class="btn btn-primary">Signup</button>
+                <button type="submit" class="btn btn-primary">Login</button>
             </form>
         </div>
     </div>

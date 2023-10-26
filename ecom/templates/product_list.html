@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+    
+    
+    <div class="container">
+        {% for product in query %}
+            <div class="product-box">
+                <img src="path/to/your/product/image.jpg" alt="Product Image">
+                <div>
+                    <div class="product-title">{{ product.2 }}</div>
+                    <div class="price"><span class="rupee-symbol">&#8377;</span>{{ product.7 }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block external_style %}
+    <style>
+        /* Modern dark styling */
+        .product-box {
+            background-color: #333;
+            color: #fff;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-box img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 10px;
+        }
+
+        .product-title {
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 20px;
+        }
+
+        .rupee-symbol {
+            font-size: 24px;
+        }
+    </style>
+{% endblock %}

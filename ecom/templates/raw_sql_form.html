@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Raw SQL Queries</title>
-</head>
-<body>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <h1>Enter Raw SQL Query</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
 
 
-    {{ ack }}
-</body>
-</html>
+
+{% extends "base.html" %}
+{% block content %} 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h1>Enter Raw SQL Query</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+
+{{ ack }}
+{% endblock %}
